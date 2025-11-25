@@ -13,10 +13,10 @@ class Destination(ModelAdmin):
 class Activity(ModelAdmin):
     list_display = ("id", "destination", "name", "date", "image", "start_time", "end_time")
     search_fields = ["name"]
-    ordering = ["~start_time"]
+    ordering = ["-start_time"]
 
 @admin.register(StayPlaces)
 class StayPlaces(ModelAdmin):
     list_display = ("id", "destination", "place_name", "check_in", "check_out")
     search_fields = ["place_name"]
-    ordering = ["~check_in"]
+    ordering = ["-check_in"]
