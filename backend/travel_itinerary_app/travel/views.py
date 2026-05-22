@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from .models import Destination, Activity
 from .serializers import DestinationSerializer, ActivitySerializer
 
-
 class ListDestinationView(APIView):
     def get(self, request):
         dests = Destination.objects.all()

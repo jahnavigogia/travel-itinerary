@@ -1,24 +1,29 @@
-Django>=4.2
-djangorestframework>=3.14
-psycopg2-binary>=2.9.10
+Django>=5.2
+djangorestframework>=3.16
+psycopg2-binary>=2.9.10     # postgresql; The binary package is a practical choice for development and testing
+                            # but in production it is advised to use the package built from sources.
+
 djangorestframework-simplejwt>=5.5.0
 django-storages>=1.14.6
-gunicorn>=23.0.0
-
-pip~=25.0.1
-distro~=1.9.0
+gunicorn>=23.0.0    # wsgi server for prod for unix systems; It acts as an intermediary between your web server (like Nginx) and your Python application, translating requests and responses.
+# decde gunicorn version later
+pip~=25.3
+# distro~=1.9.0     // gives info about os and its version; imp for systems that behave differently according to the underlying os
 wheel~=0.44.0
-asgiref~=3.8.1
+# asgiref~=3.8.1
 sqlparse~=0.5.1
-numpy~=2.1.1
 requests~=2.32.3
 typing_extensions~=4.12.2
-packaging~=25.0
+# packaging~=25.0
 boto3~=1.35.29
-botocore~=1.35.29
-s3transfer~=0.10.2
-azure-core~=1.31.0
+# botocore~=1.35.29
+# azure-core~=1.31.0
 setuptools~=75.1.0
-pytz~=2024.2
-PyJWT~=2.9.0
+pytz~=2024.2    # timezone
+# PyJWT~=2.9.0
 django-environ~=0.11.2
+react
+react-dom
+react-scripts
+axios
+react-router-dom
