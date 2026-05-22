@@ -93,4 +93,7 @@ class ActivityDetailView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
+class HomePageView(APIView):
+    def get(self, request):
+        # print("Welcome to home page")
+        return Response({"message": "Welcome to home page"})
