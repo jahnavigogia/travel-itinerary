@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post("/user/token/", {
-        username: email,
+        email: email,
         password: password,
       });
 
@@ -20,10 +21,48 @@ export default function Login() {
       localStorage.setItem("refresh", res.data.refresh);
 
       navigate("/home");
-
     } catch (err) {
-      alert("Invalid credentials");
-    }
+  console.log(err);
+
+  // Backend custom error
+  if (err.response?.data?.error) {
+    alert(err.response.data.error);
+  }
+
+  // DRF / JWT detail error
+  else if (err.response?.data?.detail) {
+    alert(err.response.data.detail);
+  }
+
+  // Validation errors
+  else if (err.response?.status === 400) {
+    alert("Please enter valid details");
+  }
+
+  // Unauthorized
+  else if (err.response?.status === 401) {
+    alert("Invalid email or password");
+  }
+
+  // Server error
+  else if (err.response?.status >= 500) {
+    alert(
+      "Server error. Please try again later."
+    );
+  }
+
+  // Network error
+  else if (err.request) {
+    alert(
+      "Network error. Please check your internet."
+    );
+  }
+
+  // Unknown
+  else {
+    alert("Login failed");
+  }
+}
   };
 
   // 🌐 Google Login
@@ -40,7 +79,7 @@ export default function Login() {
         <input
           style={styles.input}
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -57,13 +96,25 @@ export default function Login() {
         <button style={styles.button}>Login</button>
 
         {/* Google Login */}
-        <button
-          type="button"
-          style={{ ...styles.button, background: "#db4437" }}
-          onClick={handleGoogleLogin}
-        >
-          Continue with Google
-        </button>
+<button
+  type="button"
+  style={{ ...styles.button, background: "#db4437" }}
+  onClick={handleGoogleLogin}
+>
+  Continue with Google
+</button>
+
+<Link
+  to="/register"
+  style={{
+    textAlign: "center",
+    textDecoration: "none",
+    color: "#4f46e5",
+    marginTop: 10,
+  }}
+>
+  Don't have an account? Register
+</Link>
 
       </form>
     </div>
