@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from .views import GoogleJWTLogin, CurrentUserView
+from .views import GoogleJWTLogin, CurrentUserView, RegisterView, CompleteProfileView
 
 urlpatterns = [
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
@@ -13,4 +13,6 @@ urlpatterns = [
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('auth/google/jwt/', GoogleJWTLogin.as_view(), name='google_jwt'),
     path("current-user/", CurrentUserView.as_view()),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('complete-profile/', CompleteProfileView.as_view(), name='complete_profile'),
 ]

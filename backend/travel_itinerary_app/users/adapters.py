@@ -2,7 +2,6 @@ from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 
 class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
-
     def pre_social_login(self, request, sociallogin):
         print("SOCIAL LOGIN DATA:", sociallogin.account.extra_data)
 

@@ -12,14 +12,16 @@ class ActivitySerializer(serializers.Serializer):
         return data
 
 
-class DestinationSerializer(serializers.Serializer):
+class DestinationSerializer(serializers.ModelSerializer):
     activities = ActivitySerializer(many=True, read_only=True)
 
     class Meta:
         model = Destination
-        fields = "__all__"
+        fields = ["arrival_date", "departure_date", "name", "activities"]
 
     def validate(self, data):
-        if data["start_date"] > data["end_date"]:
-            raise serializers.ValidationError("Destination start_date must be on or before end_date.")
+        arrival_date =data.get("arrival_date")
+        departure_date = data.get("departure_date")
+        if (arrival_date and departure_date and arrival_date > departure_date):
+            raise serializers.ValidationError("Destination start date must be on or before end date.")
         return data

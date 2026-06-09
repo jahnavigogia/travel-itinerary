@@ -47,7 +47,7 @@ class StayPlaces(models.Model):
     place_name = models.CharField(max_length=150)
     image = models.FileField(upload_to="stay/", null=True, blank=True)
     check_in = models.DateTimeField()
-    check_out = models.DateTimeField()
+    check_out = models.DateTimeField(null=True, blank=True)
 
     def clean(self):
         super().clean()
